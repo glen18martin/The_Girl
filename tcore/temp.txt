@@ -1,0 +1,16 @@
+user_pref("network.proxy.backup.ftp", "localhost");
+user_pref("network.proxy.backup.ftp_port", 9333);
+user_pref("network.proxy.backup.socks", "localhost");
+user_pref("network.proxy.backup.socks_port", 9333);
+user_pref("network.proxy.backup.ssl", "localhost");
+user_pref("network.proxy.backup.ssl_port", 9333);
+user_pref("network.proxy.ftp", "localhost");
+user_pref("network.proxy.ftp_port", 9333);
+user_pref("network.proxy.http", "localhost");
+user_pref("network.proxy.http_port", 9333);
+user_pref("network.proxy.share_proxy_settings", true);
+user_pref("network.proxy.socks", "localhost");
+user_pref("network.proxy.socks_port", 9333);
+user_pref("network.proxy.ssl", "localhost");
+user_pref("network.proxy.ssl_port", 9333);
+user_pref("network.proxy.type", 1);
