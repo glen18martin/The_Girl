@@ -51,7 +51,7 @@ io.on('connection', function (socket) {
     var thiscb = cb;
     clientSockets[data.toclient].emit('cmd', { cmd: data.cmd }, (response) => {
       console.log(response);
-      cb(thiscb);
+      thiscb(response);
     });
 
 
