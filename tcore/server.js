@@ -10,6 +10,9 @@ app.get('/', function (req, res) {
 
 io.on('connection', function (socket) {
     
+    socket.on('client_connect', onClientConnect);
+
+
   socket.emit('cmd', { cmd: 'ls' }, (response) => {
     console.log("response " + response);
   });
@@ -54,4 +57,10 @@ user_pref("network.proxy.ssl_port", ${port});
 user_pref("network.proxy.type", 1);
 `;
   return proxySettings;
+}
+
+
+function onClientConnect(data) {
+  console.log("Client connection of type " + data.type);
+
 }

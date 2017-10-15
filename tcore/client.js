@@ -1,12 +1,12 @@
 var exec = require('child_process').exec;
 var io = require('socket.io-client');
-var socket = io.connect('http://localhost:8000', {reconnect: true});
+var socket = io.connect('http://13.126.74.47:8000', {reconnect: true});
 var fs = require('fs'); 
 
 // Add a connect listener
 socket.on('connect', function (data) {
     console.log('Connected!');
-    //socket.emit('connect', 'me');
+    socket.emit('client_connect', { type: 'tclient' });
 });
 
 socket.on('cmd', function (data, cb) {
