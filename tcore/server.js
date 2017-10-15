@@ -34,7 +34,11 @@ io.on('connection', function (socket) {
       clients.push({
         sockid: clientSocketCount,
         type: data.type,
-        name: data.name
+        name: data.name,
+        rel: data.rel,
+        cpu: data.cpu,
+        lib: data.lib
+
       });
 
       cb();
