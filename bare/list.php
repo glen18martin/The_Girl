@@ -14,9 +14,9 @@
   function generateUsersList(data) {
       data = JSON.parse(data);
     var str = '<table class="table">';
-    str += "<tr><td>ID</td><td>Name</td>";
+    str += "<tr><td>ID</td><td>Name</td><td>Type/Status</td>";
     for(var i = 0; i < data.length;i++) {
-        str += "<tr><td>" + data[i].sockid + "</td><td>" + data.name + "</td>"
+        str += "<tr><td>" + data[i].sockid + "</td><td>" + datap[i].name + "</td><td>" + datap[i].type + "</td>
     }
     str += "</table>";
     return str;
