@@ -18,8 +18,8 @@ io.on('connection', function (socket) {
     socket.on('disconnect', function() {
       console.log('Got disconnect!');
 
-      var i = clients.indexOf(socket);
-      clientSockets[i] = null;
+      var i = clientSockets.indexOf(socket);
+      clients[i] = null;
     });
 
     
