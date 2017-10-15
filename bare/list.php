@@ -18,7 +18,7 @@
         str += "<tr><td>" + data[i].sockid + "</td><td>" + data.name + "</td>"
     }
     str += "</table>";
-
+    return str;
   }
       
       
@@ -81,7 +81,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12" id="clients">
-
+        xd
     </div>
 
   </div>
