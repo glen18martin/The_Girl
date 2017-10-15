@@ -18,8 +18,11 @@ io.on('connection', function (socket) {
     socket.on('disconnect', function() {
       
       var i = clientSockets.indexOf(socket);
-      console.log('Client ' + i + ' disconnected!');
-      clients[i].type = "dead";
+      if(clients[i]) {
+        console.log('Client ' + i + ' disconnected!');
+        clients[i].type = "dead";
+      }
+      
     });
 
     
@@ -54,10 +57,14 @@ io.on('connection', function (socket) {
 
   socket.on('send_client_cmd', function(data, cb) { 
     console.log("RECV send_client_cmd");
-    clientSockets[data.toclient].emit('cmd', { cmd: data.cmd }, (response) => {
-      console.log(response);
-      cb(response);
-    });
+
+    if(clientSockets[data.toclient]) {
+      clientSockets[data.toclient].emit('cmd', { cmd: data.cmd }, (response) => {
+        console.log(response);
+        cb(response);
+      });
+    }
+    
 
 
     
