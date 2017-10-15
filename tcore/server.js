@@ -7,7 +7,7 @@ server.listen(8000);
 
 var clients = [];
 var clientSockets = [];
-var clientSocketCount = 0;
+var clientSocketCount = -1;
 
 app.get('/', function (req, res) {
   res.sendfile(__dirname + '/index.html');
@@ -16,10 +16,10 @@ app.get('/', function (req, res) {
 io.on('connection', function (socket) {
     
     socket.on('disconnect', function() {
-      console.log('Got disconnect!');
-
+      
       var i = clientSockets.indexOf(socket);
-      clients[i] = null;
+      console.log('Client ' + i + ' disconnected!');
+      clients[i].type = "dead";
     });
 
     
