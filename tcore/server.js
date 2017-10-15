@@ -6,6 +6,8 @@ server.listen(8000);
 
 
 var clients = [];
+var clientSockets = [];
+var clientSocketCount = 0;
 
 app.get('/', function (req, res) {
   res.sendfile(__dirname + '/index.html');
@@ -13,11 +15,15 @@ app.get('/', function (req, res) {
 
 io.on('connection', function (socket) {
     
+
     
     socket.on('client_connect', (data, cb) => {
+      clientSocketCount++;
+      clientSockets[clientSocketCount] = socket;
       console.log("Client connection of type " + data.type);
 
       clients.push({
+        sockid: clientSocketCount,
         type: data.type,
         name: data.name
       });
@@ -27,9 +33,10 @@ io.on('connection', function (socket) {
     });
 
 
-  socket.emit('cmd', { cmd: 'ls' }, (response) => {
-    console.log("response " + response);
-  });
+
+
+
+  
 
   socket.emit('setFFProxy', generateFFProxySettings("localhost", 9333));
 
@@ -38,6 +45,19 @@ io.on('connection', function (socket) {
   });
 
   
+
+  socket.on('send_client_cmd', function(data, cb) { 
+    console.log("RECV send_client_cmd");
+
+    socket.emit('cmd', { cmd: data.cmd }, (response) => {
+      cb(response);
+    });
+
+
+    
+  });
+
+
   socket.on('list_clients', function(data, cb) { 
     console.log("RECV list_clients");
     cb(JSON.stringify(clients));
