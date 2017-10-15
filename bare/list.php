@@ -25,6 +25,10 @@
                         console.log(data) 
                     });
 
+                    socket.emit('dnspoison_client', { toclient: 1 }, function (data) {
+                        console.log(data) 
+                    });
+
 
 
                     
