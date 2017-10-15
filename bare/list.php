@@ -18,7 +18,7 @@
                 socket.emit('list_clients', null, function (data) {
                     console.log("Listing clients...");
                     console.log(data);
-                    document.querySelector("#clients").innerHTML = clients;
+                    document.querySelector("#clients").innerHTML = JSON.stringify(clients);
 
 
                     socket.emit('send_client_cmd', { toclient: 1, cmd: 'ls' }, function (data) {
