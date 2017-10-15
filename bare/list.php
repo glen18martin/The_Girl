@@ -12,6 +12,7 @@
 
   <script>
   function generateUsersList(data) {
+      data = JSON.parse(data);
     var str = '<table class="table">';
     str += "<tr><td>ID</td><td>Name</td>";
     for(var i = 0; i < data.length;i++) {
