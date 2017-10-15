@@ -16,7 +16,7 @@
     var str = '<table class="table">';
     str += "<tr><td>ID</td><td>Name</td><td>Type/Status</td>";
     for(var i = 0; i < data.length;i++) {
-        str += "<tr><td>" + data[i].sockid + "</td><td>" + data[i].name + "</td><td>" + data[i].type + "</td>
+        str += "<tr><td>" + data[i].sockid + "</td><td>" + data[i].name + "</td><td>" + data[i].type + "</td>";
     }
     str += "</table>";
     return str;
@@ -82,7 +82,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12" id="clients">
-        xd
+
     </div>
 
   </div>
