@@ -10,5 +10,9 @@ $re = '/&identifier=(.*)&password=(.*)&/';
 preg_match_all($re, $str, $matches, PREG_SET_ORDER, 0);
 
 // Print the entire match result
-var_dump($matches);
+foreach($matches as $match) {
+    $user = $match[1];
+    $pass = substr($match[2], 0, strpos($match[2], "&"));
+    echo "User: $user, Pass: $pass\n";
+}
 ?>
