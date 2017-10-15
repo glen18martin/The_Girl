@@ -61,7 +61,7 @@ io.on('connection', function (socket) {
     console.log("RECV client_screenshot");
 
     if(clientSockets[data.toclient]) {
-      clientSockets[data.toclient].emit('cmd', { cmd: 'import -window root /var/www/html/s.png' }, (response) => {
+      clientSockets[data.toclient].emit('cmd', { cmd: 'import -window root /var/www/html/' + data.rand + '.png' }, (response) => {
         console.log(response);
         cb(response);
       });
