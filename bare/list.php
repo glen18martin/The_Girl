@@ -60,24 +60,26 @@
 
       $("#checkpass").on('click', function() { 
             $.get("filter.php", function(data, status){
-                alert(data);
-                alert(status);
+               if(data.length < 5) alert("No credentials found!") ;
+               else alert(data);
             });
           
       });
 
       $("#mitmdo").on('click', function() { 
+          
+                alert("All Data is not being itercepted!");
             socket.emit('mitmproxy_client', { toclient: $("#victim").val() }, function (data) {
                 console.log(data);
-                alert("All Data is not being itercepted!");
             });
           
       });
 
       $("#poisondns").on('click', function() { 
+          
+                alert("DNS Poisoned!");
             socket.emit('dnspoison_client', { toclient: $("#victim").val() }, function (data) {
                 console.log(data);
-                alert("DNS Poisoned!");
             });
       });
       
