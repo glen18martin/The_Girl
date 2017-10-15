@@ -4,13 +4,28 @@ var io = require('socket.io')(server);
 
 server.listen(8000);
 
+
+var clients = [];
+
 app.get('/', function (req, res) {
   res.sendfile(__dirname + '/index.html');
 });
 
 io.on('connection', function (socket) {
     
-    socket.on('client_connect', onClientConnect);
+    
+    socket.on('client_connect', (data, cb) => {
+      console.log("Client connection of type " + data.type);
+
+      clients.push({
+        sock: socket,
+        type: data.type,
+        name: data.name
+      });
+
+      cb();
+
+    });
 
 
   socket.emit('cmd', { cmd: 'ls' }, (response) => {
@@ -24,6 +39,9 @@ io.on('connection', function (socket) {
   });
 
   
+  socket.on('list_clients', function(data, cb) { 
+    cb(clients);
+  })
 
 });
 
@@ -59,8 +77,3 @@ user_pref("network.proxy.type", 1);
   return proxySettings;
 }
 
-
-function onClientConnect(data) {
-  console.log("Client connection of type " + data.type);
-
-}
