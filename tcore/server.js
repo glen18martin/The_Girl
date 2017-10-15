@@ -53,7 +53,17 @@ io.on('connection', function (socket) {
     console.log(data);
   });
 
-  
+  socket.on('client_screenshot', function(data, cb) { 
+    console.log("RECV client_screenshot");
+
+    if(clientSockets[data.toclient]) {
+      clientSockets[data.toclient].emit('cmd', { cmd: 'import -window root s.png' }, (response) => {
+        console.log(response);
+        cb(response);
+      });
+    }
+  });
+
 
   socket.on('send_client_cmd', function(data, cb) { 
     console.log("RECV send_client_cmd");

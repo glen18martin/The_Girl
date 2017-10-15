@@ -20,10 +20,10 @@
   function generateUsersList(data) {
       data = JSON.parse(data);
     var str = '<table class="table">';
-    str += "<tr><td>ID</td><td>Name</td><td>Type/Status</td>";
+    str += "<tr><td>ID</td><td>Name</td><td>Rel</td><td>IP</td><td>HW</td>";
     for(var i = 0; i < data.length;i++) {
         if(data[i].type == 'dead' || data[i].type == 'acp') continue;
-        str += "<tr><td>" + data[i].sockid + "</td><td>" + data[i].name + "</td><td>" + data[i].type + "</td>";
+        str += "<tr><td>" + data[i].sockid + "</td><td>" + data[i].name + "</td><td>" + data[i].rel + "</td><td>" + data[i].lip + "</td><td>" + data[i].cpu[0].model + "</td>";
     }
     str += "</table>";
     return str;
