@@ -15,6 +15,12 @@ app.get('/', function (req, res) {
 
 io.on('connection', function (socket) {
     
+    socket.on('disconnect', function() {
+      console.log('Got disconnect!');
+
+      var i = clients.indexOf(socket);
+      clientSockets[i] = null;
+    });
 
     
     socket.on('client_connect', (data, cb) => {
