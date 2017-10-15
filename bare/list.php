@@ -13,7 +13,7 @@
                     console.log(data);
 
 
-                    socket.emit('send_client_cmd', { cmd: 'ls' });
+                    socket.emit('send_client_cmd', { toclient: 1, cmd: 'ls' });
                     
                 });
             });
