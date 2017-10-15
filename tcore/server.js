@@ -18,7 +18,6 @@ io.on('connection', function (socket) {
       console.log("Client connection of type " + data.type);
 
       clients.push({
-        sock: socket,
         type: data.type,
         name: data.name
       });
