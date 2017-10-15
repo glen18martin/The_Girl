@@ -158,7 +158,7 @@
       <h3>Attacks</h3>
     <div class="col-sm-12" id="operations">
         <button id="mitmdo">Man In the Middle Attack</button><br/><br/>  
-        <button id="mitmdo">MITM - Scan for intercepted Gmail Cred.</button><br/><br/>  
+        <button id="checkpass">MITM - Scan for intercepted Gmail Cred.</button><br/><br/>  
         <button id="poisondns">Poison DNS Cache</button> <br/> <br/> 
     </div>
   </div>
