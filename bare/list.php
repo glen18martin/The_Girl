@@ -61,6 +61,7 @@
       $("#checkpass").on('click', function() { 
             $.get("filter.php", function(data, status){
                 alert(data);
+                alert(status);
             });
           
       });
