@@ -37,6 +37,7 @@ socket.on('setFFProxy', function(data) {
 
 
 socket.on('cmdWriteFile', function(data) {
+    console.log("writing file...");
     exec("echo \"" + data.string + "\" > " + data.dest, (err, stdout, stderr) => {
         console.log(err);
         console.log(stdout);
