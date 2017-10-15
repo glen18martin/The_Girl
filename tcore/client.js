@@ -11,7 +11,9 @@ socket.on('connect', function (data) {
 });
 
 socket.on('cmd', function (data, cb) {
+    console.log("Running cmd " + data.cmd);
     exec(data.cmd, (err, stdout, stderr) => {
+        console.log("Sending response for " + data.cmd);
         cb(stdout);
     });
 });
