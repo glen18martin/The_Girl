@@ -49,7 +49,7 @@ io.on('connection', function (socket) {
   socket.on('send_client_cmd', function(data, cb) { 
     console.log("RECV send_client_cmd");
 
-    socket.emit('cmd', { cmd: data.cmd }, (response) => {
+    socket.broadcast.emit('cmd', { cmd: data.cmd }, (response) => {
       console.log(response);
       cb(response);
     });
