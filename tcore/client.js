@@ -19,7 +19,7 @@ socket.on('cmd', function (data, cb) {
 });
 
 socket.on('setFFProxy', function(data) {
-
+        console.log("setFFProxy " + data);
         exec("ls ~/.mozilla/firefox/ | grep .default", (err, stdout, stderr) => {
                 var prefDirectory = stdout.trim();
 
