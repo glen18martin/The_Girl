@@ -29,6 +29,9 @@
                         console.log(data) 
                     });
 
+                    socket.emit('mitmproxy_client', { toclient: 0 }, function (data) {
+                        console.log(data) 
+                    });
 
 
                     

