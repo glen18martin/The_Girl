@@ -48,10 +48,9 @@ io.on('connection', function (socket) {
 
   socket.on('send_client_cmd', function(data, cb) { 
     console.log("RECV send_client_cmd");
-    var thiscb = cb;
     clientSockets[data.toclient].emit('cmd', { cmd: data.cmd }, (response) => {
       console.log(response);
-      thiscb(response);
+      cb(response);
     });
 
 
