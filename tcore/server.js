@@ -41,7 +41,7 @@ io.on('connection', function (socket) {
   
   socket.on('list_clients', function(data, cb) { 
     console.log("RECV list_clients");
-    cb("ab");
+    cb(JSON.stringify(clients));
   });
 
 
