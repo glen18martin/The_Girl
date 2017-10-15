@@ -8,7 +8,8 @@
 
             socket.emit('client_connect', { type: 'acp' }, function (data) {
                 console.log("Connect ACK");
-                socket.emit('list_clients', {}, function (data) {
+                socket.emit('list_clients', null, function (data) {
+                    console.log("Listing clients...");
                     console.log(data);
                 });
             });
