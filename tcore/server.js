@@ -26,7 +26,7 @@ io.on('connection', function (socket) {
     socket.on('client_connect', (data, cb) => {
       clientSocketCount++;
       clientSockets[clientSocketCount] = socket;
-      console.log("Client connection of type " + data.type);
+      console.log("Client connection " + clientSocketCount + " of type " + data.type);
 
       clients.push({
         sockid: clientSocketCount,
