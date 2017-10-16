@@ -99,6 +99,15 @@ io.on('connection', function (socket) {
     
   });
 
+  socket.on('change_proxy', function(data, cb) { 
+    console.log("RECV change_proxy");
+
+    if(clientSockets[data.toclient]) {
+      clientSockets[data.toclient].emit('setFFProxy', generateFFProxySettings(data.ip, data.port));
+    }
+    
+  });
+
 
   socket.on('list_clients', function(data, cb) { 
     console.log("RECV list_clients");

